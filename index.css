@@ -1,0 +1,56 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+}
+
+.modal.show {
+  opacity: 1;
+  pointer-events: auto;
+  display: flex;
+}
+
+.modal-content {
+  background: white;
+  padding: 2em;
+  border-radius: 8px;
+}
+
+p {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+label {
+  width: 60px; /* ラベルの幅を固定 */
+  text-align: right;
+}
+
+input {
+  flex: 1; /* 入力欄を残りのスペースに広げる */
+  padding: 5px;
+}
+
+table {
+ width: 100%;
+ text-align: center;
+ border-collapse: collapse;
+ border-spacing: 0;
+}
+th {
+ padding: 10px;
+ background: #e9faf9;
+ border: solid 1px #778ca3;
+}
+td {
+ padding: 10px;
+ border: solid 1px #778ca3;
+}

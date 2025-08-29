@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <title>イロレーティング計算</title>
+    <!-- <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css" /> -->
+    
+    <link rel="stylesheet" href="index.css"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="index.js"></script>
+</head>
+<body>
+    <h1>イロレーティング計算ツール（AC6チーム戦用）</h1>
+
+    <h2>機能一覧</h2>
+    <p>
+        <button id="showAddMemberModal" onclick="showAddMemberModal()">メンバー追加</button>
+        <button id="showBattleResultModal" onclick="showBattleResultModal()">勝敗記入</button>
+    </p>
+    <p>
+        <button onclick="clickSaveButton()">セーブ</button>
+        <button onclick="clickLoadButton()">ロード</button>
+        <input type="file" id="load" accept="text/plain" onchange="selectLoadButton(event)" hidden ></input>
+    </p>
+    <input type="hidden" id="tmp_data" />
+    <hr>
+
+    <h2>メンバー一覧</h2>
+    <div id="members">
+        <table>
+            <thead>
+                <tr><th>名前</th><th>初期レート</th><th>現レート</th></tr>
+            </thead>
+            <tbody id="membersList">
+                
+            </tbody>
+        </table>
+    </div>
+    
+    <hr>
+    <h2>履歴</h2>
+    <div id="histories">
+        <table>
+            <thead>
+                <!-- <tr><th>メンバー</th><th>勝敗</th><th>変動前レート</th><th>変動後レート</th></tr> -->
+                <tr><th>結果</th></tr>
+            </thead>
+            <tbody id="historiesList">
+
+            </tbody>
+        </table>
+    </div>
+
+    <!-- modals -->
+    <div class="modal" id="addMemberModal" tabindex="-1" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">メンバー追加</h5>
+                </div>
+                <div class="modal-body">
+                    <p>追加ユーザの情報を入力してください</p>
+                    <p>
+                        <label for="new_name">名前</label>
+                        <input id="new_name" type="text" />
+                    </p>
+                    <p>
+                        <label for="new_rate">レート</label>
+                        <input id="new_rate" type="number" value="1500"/>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="addMemberModalClose" onclick="closeAddMemberModal()">閉じる</button>
+                    <button type="button" id="addMemberModalAdd"  onclick="clickAddMenberButton()">追加</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modals -->
+    <div class="modal" id="battleResultModal" tabindex="0" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">戦闘結果記入</h5>
+                </div>
+                <div class="modal-body">
+                    <p>戦闘の結果を入力してください</p>
+                    <p>
+                        <label for="winner_name1">勝者1</label>
+                        <select id="winner_name1"></select>
+                    </p>
+                    <p>
+                        <label for="winner_name2">勝者2</label>
+                        <select id="winner_name2"></select>
+                    </p>
+                    <p>
+                        <label for="winner_name3">勝者3</label>
+                        <select id="winner_name3"></select>
+                    </p>
+                    <p>
+                        <label for="loser_name1">敗者1</label>
+                        <select id="loser_name1"></select>
+                    </p>
+                    <p>
+                        <label for="loser_name2">敗者2</label>
+                        <select id="loser_name2"></select>
+                    </p>
+                    <p>
+                        <label for="loser_name3">敗者3</label>
+                        <select id="loser_name3"></select>
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="addMemberModalClose" onclick="closeBattleResultModal()">閉じる</button>
+                    <button type="button" id="addMemberModalAdd"  onclick="registBattleResultModal()">登録</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        init();
+    </script> 
+</body>
+</html>
