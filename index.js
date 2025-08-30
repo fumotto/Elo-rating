@@ -180,6 +180,11 @@ const registBattleResultModal = () =>{
     const loser3rate = tmpData.members[loser3index].currentRate;
     const loser3name  = tmpData.members[loser3index].name;
     
+    if ([...new Set([winner1index,winner2index,winner3index,loser1index,loser2index,loser3index])].length < 6){
+        alert('選択した選手に被りがあるようです');
+        return;
+    }
+
     //計算
     const result = calcElo(
         winner1rate,winner2rate,winner3rate
@@ -274,6 +279,9 @@ const deleteHistory = () => {
     renderHistoryTable();
 }
 
-const onclickCheckBox = (event) => {
+/**
+ * K チェックボックス変更
+ */
+const onclickKCheckBox = () => {
     $('#kvalue').prop('disabled',!$('#kcheckbox').prop('checked'));
 }

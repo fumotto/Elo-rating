@@ -16,7 +16,7 @@
     <h1>イロレーティング計算ツール（AC6チーム戦用）</h1>
     <div class="right">
         <label>K</label>
-        <input type="checkbox" id="kcheckbox" onchange="onclickCheckBox()"/>
+        <input type="checkbox" id="kcheckbox" onchange="onclickKCheckBox()"/>
         <input type="number" id="kvalue" value="32" disabled />
     </div>
     <h2>機能一覧</h2>
@@ -50,7 +50,6 @@
     <div id="histories">
         <table>
             <thead>
-                <!-- <tr><th>メンバー</th><th>勝敗</th><th>変動前レート</th><th>変動後レート</th></tr> -->
                 <tr><th>結果</th></tr>
             </thead>
             <tbody id="historiesList">
@@ -59,7 +58,7 @@
         </table>
     </div>
 
-    <!-- modals -->
+    <!-- メンバー追加modal -->
     <div class="modal" id="addMemberModal" tabindex="-1" >
         <div class="modal-dialog">
             <div class="modal-content">
@@ -67,7 +66,7 @@
                     <h5 class="modal-title">メンバー追加</h5>
                 </div>
                 <div class="modal-body">
-                    <p>追加ユーザの情報を入力してください</p>
+                    <p>追加メンバーの情報を入力してください</p>
                     <p>
                         <label for="new_name">名前</label>
                         <input id="new_name" type="text" />
@@ -85,7 +84,7 @@
         </div>
     </div>
 
-    <!-- modals -->
+    <!-- 勝敗記入modals -->
     <div class="modal" id="battleResultModal" tabindex="0" >
         <div class="modal-dialog">
             <div class="modal-content">
