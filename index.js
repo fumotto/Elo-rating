@@ -1,11 +1,8 @@
 /**
  * Elo rating 計算
- * @param number winnerRating 
- * @param number loserRating 
- * @returns {number, number}
  */
 const calcElo = (winner1,winner2,winner3 , loser1,loser2,loser3) => {
-    const K = 32; // K係数
+    const K = $('#kvalue').val(); // K係数
     const winnerScore = 1;
     const loserScore = 0;
 
@@ -275,4 +272,8 @@ const deleteHistory = () => {
     saveTmpData(tmpData);
     renderMemberTable();
     renderHistoryTable();
+}
+
+const onclickCheckBox = (event) => {
+    $('#kvalue').prop('disabled',!$('#kcheckbox').prop('checked'));
 }
