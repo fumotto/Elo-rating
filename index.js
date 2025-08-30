@@ -183,8 +183,6 @@ const registBattleResultModal = () =>{
     const loser3rate = tmpData.members[loser3index].currentRate;
     const loser3name  = tmpData.members[loser3index].name;
     
-    $("#winner_name1 option:selected").text();
-    
     //計算
     const result = calcElo(
         winner1rate,winner2rate,winner3rate
@@ -199,12 +197,12 @@ const registBattleResultModal = () =>{
     tmpData.members[loser3index].currentRate =result.loser3;
     //履歴挿入
     tmpData.history.push([
-        {name:winner1name , rate: result.winner1}
-        ,{name:winner2name , rate: result.winner2}
-        ,{name:winner3name , rate: result.winner3}
-        ,{name:loser1name , rate: result.loser1}
-        ,{name:loser2name , rate: result.loser2}
-        ,{name:loser3name , rate: result.loser3}
+        {index: winner1index ,name:winner1name , beforeRate:winner1rate, rate: result.winner1}
+        ,{index: winner2index ,name:winner2name , beforeRate:winner2rate, rate: result.winner2}
+        ,{index: winner3index ,name:winner3name , beforeRate:winner3rate, rate: result.winner3}
+        ,{index: loser1index , name:loser1name , beforeRate:loser1rate, rate: result.loser1}
+        ,{index: loser2index ,name:loser2name , beforeRate:loser2rate, rate: result.loser2}
+        ,{index: loser3index ,name:loser3name , beforeRate:loser3rate, rate: result.loser3}
     ]);
     
     saveTmpData(tmpData);
@@ -247,6 +245,34 @@ const clickLoadButton = () => {
 const selectLoadButton = async (event) => {
     const text = await event.target.files[0].text();
     saveTmpData(JSON.parse(text));
+    renderMemberTable();
+    renderHistoryTable();
+}
+
+/**
+ * 履歴削除ボタン押下
+ */
+const deleteHistory = () => {
+
+    if (!window.confirm("最新の履歴を1行削除し、レートを戻します。よろしいですか？")){
+        return;
+    }
+
+    const tmpData = readTmpData();
+
+    if (tmpData.history.length < 1) {
+        alert('削除できる履歴がありません');
+        return;
+    }
+
+    const lastHistory = tmpData.history[tmpData.history.length - 1];
+    tmpData.history.pop();
+
+    lastHistory.forEach((e) => {
+        tmpData.members[e.index].currentRate = e.beforeRate;
+    });
+    
+    saveTmpData(tmpData);
     renderMemberTable();
     renderHistoryTable();
 }
