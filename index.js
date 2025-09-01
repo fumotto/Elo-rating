@@ -215,6 +215,7 @@ const registBattleResultModal = () =>{
 
     //モーダル閉じる
     closeBattleResultModal();
+    showYay();
 }
 
 /**
@@ -277,6 +278,7 @@ const deleteHistory = () => {
     saveTmpData(tmpData);
     renderMemberTable();
     renderHistoryTable();
+    showYay();
 }
 
 /**
@@ -284,4 +286,19 @@ const deleteHistory = () => {
  */
 const onclickKCheckBox = () => {
     $('#kvalue').prop('disabled',!$('#kcheckbox').prop('checked'));
+}
+
+
+/**
+ * レート変動アニメーション
+ */
+const showYay = async () =>{
+    const yay = document.createElement('div');
+    yay.className = 'yay';
+    yay.textContent = 'レート変動！';
+    document.body.appendChild(yay);
+    
+    setTimeout(() => {
+        yay.remove();
+    }, 1000);
 }
