@@ -84,3 +84,24 @@ td {
     opacity: 0;
   }
 }
+
+textarea {
+  width: 300px;
+  height: 100px;
+}
+
+.info::before{
+    content: "i";
+    font-size: 85%;
+    margin-right: 5px;
+    display: inline-block;
+    vertical-align: 2px;
+    width: 1.5em;
+    height: 1.5em;
+    text-align: center;
+    line-height: 1.5;
+    border-radius: 50%;
+    background: #4287f5;
+    color: #FFF;
+    font-weight: bold;
+}

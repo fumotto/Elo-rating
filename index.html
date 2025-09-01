@@ -118,6 +118,9 @@
                         <label for="loser_name3">敗者3</label>
                         <select id="loser_name3"></select>
                     </p>
+                    <label for="OCR_JSON">OCR</label><br />
+                    <!-- <a href="#" class="info"></a> -->
+                    <textarea id="OCR_JSON" placeholder="ここに特定形式のJSON文字列を入力すると、勝者・敗者プルダウンを自動入力してくれるよ。" onblur="onblurOcrJson()"></textarea>
                 </div>
                 <div class="modal-footer">
                     <button type="button" id="addMemberModalClose" onclick="closeBattleResultModal()">閉じる</button>

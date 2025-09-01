@@ -136,6 +136,8 @@ const showBattleResultModal = () =>{
     $("#loser_name3").empty();
     $("#loser_name3").append(option);
 
+    $("#OCR_JSON").val("");
+
     const battleResultModal = $('#battleResultModal');
     battleResultModal.addClass("show");
 }
@@ -337,4 +339,45 @@ const showRanking = () => {
 const closeRanking = () =>{
     const rankingModal = $('#rankingModal');
     rankingModal.removeClass("show");
+}
+
+/**
+ * 特定形式のJSON文字列を入力すると、勝者・敗者プルダウンを自動入力してくれる機能。
+ * 
+ * AC6のリザルトのスクショをAIで解析して、下記のようなJSONを出力してもらう前提
+ * JSONテンプレート
+ * {"MATCH_ID" : "" , "date":"" , "MAP" : "" ,"ALPHA":{"result" : "LOSE" , "players" :["player1","player2","player3"]} , "BETA" :{"result" : "WIN" ,"players" :["player4","player5","player6"]}}
+ */
+const onblurOcrJson = () => {
+    try {
+        const jsontxt = $("#OCR_JSON").val();
+        if (jsontxt === "") {
+            return;
+        }
+        const json = JSON.parse($("#OCR_JSON").val());
+
+        [json.ALPHA , json.BETA].forEach((e) => {
+            if (e.result === "WIN"){
+                selectOptionText("#winner_name1" , e.players[0]);
+                selectOptionText("#winner_name2" , e.players[1]);
+                selectOptionText("#winner_name3" , e.players[2]);
+            } else if (e.result === "LOSE"){
+                selectOptionText("#loser_name1" , e.players[0]);
+                selectOptionText("#loser_name2" , e.players[1]);
+                selectOptionText("#loser_name3" , e.players[2]);
+            }
+        });
+
+    } catch {
+        alert("なにかがおかしいようです。入力ミスかも？");
+    }
+
+}
+
+function selectOptionText(text ,playerName ) {
+    $(text + " option").each(function() {
+        if(playerName === $(this).text() ){
+            $(this).prop('selected', true);
+        }
+    });
 }
