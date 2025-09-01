@@ -108,7 +108,6 @@ const renderHistoryTable = () =>{
     const saveData = readTmpData();
     let table = "";
     saveData.history.forEach(element => {
-        //TODO
         table += "<tr><td>"+JSON.stringify(element)+"</td></tr>"
     });
     $("#historiesList").empty();
@@ -301,4 +300,41 @@ const showYay = async () =>{
     setTimeout(() => {
         yay.remove();
     }, 1000);
+}
+
+/**
+ * ランキングモーダル表示
+ */
+const showRanking = () => {
+    const tmpData = readTmpData();
+    
+    //ランキング作成
+    const sorted = tmpData.members.sort((a ,b) => b.currentRate - a.currentRate);
+    let rank = 1;
+    let prevScore = null;
+    let displayRank = 1;
+    let rankingList = "";
+    sorted.forEach((e , i) => {
+        if (e.currentRate !== prevScore) {
+            displayRank = rank;
+        }
+        rankingList += "<p>" + displayRank + " : " + e.name + " : " +e.currentRate + "</p>";
+        prevScore = e.currentRate;
+        rank++;
+    });
+
+    //表示
+    $("#ranking").empty();
+    $("#ranking").append(rankingList);
+
+    const rankingModal = $('#rankingModal');
+    rankingModal.addClass("show");
+} 
+
+/**
+ * ランキングモーダル閉じる
+ */
+const closeRanking = () =>{
+    const rankingModal = $('#rankingModal');
+    rankingModal.removeClass("show");
 }

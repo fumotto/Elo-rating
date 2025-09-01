@@ -23,6 +23,7 @@
     <p>
         <button id="showAddMemberModal" onclick="showAddMemberModal()">メンバー追加</button>
         <button id="showBattleResultModal" onclick="showBattleResultModal()">勝敗記入</button>
+        <button onclick="showRanking()">ランキング表示</button>
     </p>
     <p>
         <button onclick="clickSaveButton()">セーブ</button>
@@ -125,7 +126,24 @@
             </div>
         </div>
     </div>
+    <!-- 勝敗記入modals -->
+    <div class="modal" id="rankingModal" tabindex="0" >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">ランキング</h5>
+                </div>
+                <div class="modal-body">
+                    <div id="ranking">
 
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="addMemberModalClose" onclick="closeRanking()">閉じる</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         init();
     </script> 
